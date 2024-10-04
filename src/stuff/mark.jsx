@@ -20,7 +20,7 @@ export default function FinalMarkdown() {
   ];
 
   const [mdInput, setMdInput] = useState(
-    "# **This Markdown editor is made by** \n # **Sreehaas Penugonda** \n u may write ur own here with the help of toolbar"
+    "# **This Markdown editor is made by** \n # **Sreehaas Penugonda** \n u may write ur own Markdown here with the help of toolbar"
   );
   const [htmlOut, setHtmlOut] = useState("");
 
