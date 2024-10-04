@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import remarkGfm from "remark-gfm";
 import copy from "copy-to-clipboard";
 import { toast } from "react-hot-toast";
 import Markdown from "markdown-to-jsx";
@@ -7,15 +6,17 @@ import Markdown from "markdown-to-jsx";
 export default function FinalMarkdown() {
   const buttons = [
     { id: 1, name: "bold" },
-    { id: 2, name: "heading1" },
-    { id: 3, name: "heading2" },
-    { id: 4, name: "heading3" },
-    { id: 5, name: "heading4" },
-    { id: 6, name: "heading5" },
-    { id: 7, name: "heading6" },
+    { id: 2, name: "H1" },
+    { id: 3, name: "H2" },
+    { id: 4, name: "H3" },
+    { id: 5, name: "H4" },
+    { id: 6, name: "H5" },
+    { id: 7, name: "H6" },
     { id: 8, name: "italic" },
-    { id: 9, name: "Copy Markdown" },
-    { id: 10, name: "Copy HTML" },
+    { id: 9, name: "Strikethrough" },
+    { id: 10, name: "Table" },
+    { id: 11, name: "Copy Markdown" },
+    { id: 12, name: "Copy HTML" },
   ];
 
   const [mdInput, setMdInput] = useState(
@@ -27,22 +28,22 @@ export default function FinalMarkdown() {
     if (name === "bold") {
       setMdInput((mdInput) => mdInput + "\n**bold**");
       toast.info("Bold Text Inserted");
-    } else if (name === "heading1") {
+    } else if (name === "H1") {
       setMdInput((mdInput) => mdInput + "\n# Heading1");
       toast.info("Heading-1 Inserted");
-    } else if (name === "heading2") {
+    } else if (name === "H2") {
       setMdInput((mdInput) => mdInput + "\n## Heading2");
       toast.info("Heading-2 Inserted");
-    } else if (name === "heading3") {
+    } else if (name === "H3") {
       setMdInput((mdInput) => mdInput + "\n### Heading3");
       toast.info("Heading-3 Inserted");
-    } else if (name === "heading4") {
+    } else if (name === "H4") {
       setMdInput((mdInput) => mdInput + "\n#### Heading4");
       toast.info("Heading-4 Inserted");
-    } else if (name === "heading5") {
+    } else if (name === "H5") {
       setMdInput((mdInput) => mdInput + "\n##### Heading5");
       toast.info("Heading-5 Inserted");
-    } else if (name === "heading6") {
+    } else if (name === "H6") {
       setMdInput((mdInput) => mdInput + "\n###### Heading6");
       toast.info("Heading-6 Inserted");
     } else if (name === "italic") {
@@ -54,6 +55,14 @@ export default function FinalMarkdown() {
     } else if (name === "Copy HTML") {
       copy(htmlOut);
       toast.success("HTML Copied!");
+    } else if (name === "Strikethrough") {
+      setMdInput((mdInput) => mdInput + "\n~~Strikethrough~~");
+    } else if (name === "Table") {
+      setMdInput(
+        (mdInput) =>
+          mdInput +
+          " \n | column 1 | column 2 | column 3 |   \n | ---- | --- | --- |  \n | row 1 | row 1 | row 1 |  \n | row 2 | row 2 | row 2 |\n"
+      );
     }
   }
 
@@ -69,13 +78,13 @@ export default function FinalMarkdown() {
     <div className="flex md:flex-row flex-col gap-6 justify-center p-6 mt-6">
       <div className="w-full md:w-1/2">
         <div className="w-full bg-gradient-to-r from-blue-600 to-blue-950 text-white text-2xl md:text-3xl lg:text-4xl px-3 py-2 rounded-t-md shadow-lg">
-          <span className="font-bold">Markdown Editor</span>
+          <span className="font-bold">Markdown Typespace</span>
         </div>
         <div className="bg-gray-900">
           <div className="grid grid-cols-4 sm:grid-cols-6 gap-1 p-2 bg-gradient-to-r from-teal-400 to-cyan-600 font-bold">
             {buttons.map((buttons) => (
               <button
-                className="p-2 text-center text-[10px] md:text-sm lg:text-base border-2 border-transparent hover:border-teal-400 rounded hover:bg-gradient-to-r hover:from-red-500 hover:to-orange-500 text-white transition-all"
+                className="p-2 text-center text-[10px] md:text-sm lg:text-base border-2 border-transparent hover:border-teal-400 rounded hover:bg-gradient-to-r hover:from-rose-700 hover:to-rose-500 text-white transition-all"
                 type="button"
                 key={buttons.id}
                 title={buttons.name}
@@ -88,7 +97,7 @@ export default function FinalMarkdown() {
         </div>
         <textarea
           autoFocus
-          className="w-full h-[300px] md:h-[600px] p-4 bg-transparent text-black font-mono rounded-b-md shadow-inner resize-none"
+          className="w-full h-[300px] md:h-[600px] p-4 bg-transparent text-black rounded-b-md shadow-inner resize-none"
           value={mdInput}
           onChange={(e) => setMdInput(e.target.value)}
           placeholder="Enter markdown here..."
@@ -96,9 +105,9 @@ export default function FinalMarkdown() {
       </div>
       <div className="w-full md:w-1/2">
         <div className="w-full bg-gradient-to-r from-blue-600 to-blue-950 text-white text-2xl md:text-3xl lg:text-4xl px-3 py-2 rounded-t-md shadow-lg">
-          <span className="font-bold">Markdown Viewer</span>
+          <span className="font-bold">Markdown </span>
         </div>
-        <div className="w-full h-[340px] md:h-[715px] bg-transparent text-black font-mono p-4 rounded-b-md shadow-inner overflow-auto">
+        <div className="w-full h-[340px] md:h-[715px] bg-transparent text-black p-4 rounded-b-md shadow-inner overflow-auto">
           <Markdown className="output">{mdInput}</Markdown>
         </div>
       </div>
